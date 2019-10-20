@@ -159,3 +159,40 @@ password()
 
 ## Oppgave 8
 
+
+# Part one
+# creating a vector with an NA to use for testing purposes
+z <- c(1, 2, 3, NA, 4, 5)
+
+count_na <- function(x) {
+  # count the number of NA
+  sum(is.na(x))
+}
+
+count_na(x)
+count_na(z)
+
+percentage_na <- function(x) {
+  # percentage of NA in the vector
+  mean(is.na(x))
+}
+
+percentage_na(x)
+percentage_na(z)
+
+
+# Part two - using purrr
+
+library(purrr)
+
+map_df(airquality, function(x) sum(is.na(x)))
+
+
+
+df <- airquality %>%
+  count_na_df <- purrr::map_df(data = airquality, f = sum(is.na(.)))
+
+df <- airquality %>%
+  map_df(~ sum(is.na(.)))
+
+count_na_vector <- purrr::map_df(~ sum(is.na(.)))
