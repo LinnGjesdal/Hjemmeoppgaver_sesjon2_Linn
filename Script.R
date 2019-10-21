@@ -188,11 +188,33 @@ library(purrr)
 map_df(airquality, function(x) sum(is.na(x)))
 
 
+## Oppgave 9
 
-df <- airquality %>%
-  count_na_df <- purrr::map_df(data = airquality, f = sum(is.na(.)))
+file_paths <- fs::dir_ls(path = "./grades", regexp = "\\.csv$")
 
-df <- airquality %>%
-  map_df(~ sum(is.na(.)))
+df_fylke <- file_paths %>%
+  purrr:: map_dfr(read.csv2, skip = 4, col.names = c("fylke", "fag", "gender", "parental_education", "variabel", "values"))
 
-count_na_vector <- purrr::map_df(~ sum(is.na(.)))
+df_fylke_no_na <- df_fylke %>%
+  na.omit(df_fylke_no_na)
+
+df_fylke_na_sep <- df_fylke_no_na %>%
+  separate(variabel, c("variabel", "year"), sep = "_")
+
+df_transformed <- df_fylke_na_sep %>%
+  filter(variabel == "Gjennomsnittlig standpunktkarakter")
+
+beste_fylke <- function(year = 2016) {
+  # find mean per year
+  group_by({{fylke}}) %>%
+    beste <- mean({{values}}) %>%
+      arrange(-beste)
+  
+}
+
+beste_fylke(df_transformed)
+
+df %>% 
+  group_by(end_station_name) %>% 
+  summarise(snitt_duration = mean(duration)) %>% 
+  arrange(-snitt_duration)
