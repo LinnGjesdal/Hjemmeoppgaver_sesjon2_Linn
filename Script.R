@@ -204,11 +204,13 @@ df_fylke_na_sep <- df_fylke_no_na %>%
 df_transformed <- df_fylke_na_sep %>%
   filter(variabel == "Gjennomsnittlig standpunktkarakter")
 
-beste_fylke <- function(year = 2016) {
+beste_fylke <- function(data = df_transformed, year = 2016) {
   # find mean per year
-  group_by({{fylke}}) %>%
-    beste <- mean({{values}}) %>%
-      arrange(-beste)
+  data %>%
+    group_by(fylke) %>%
+    summarise(beste = mean(values)) %>%
+      arrange(-beste) %>%
+    top_n(10, beste)
   
 }
 
