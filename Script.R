@@ -220,3 +220,8 @@ df %>%
   group_by(end_station_name) %>% 
   summarise(snitt_duration = mean(duration)) %>% 
   arrange(-snitt_duration)
+
+
+## Oppgave 10
+
+## Må bruke {{}} for vi kan endre hva vi sender inn
